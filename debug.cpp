@@ -5,7 +5,7 @@ int		stacklevel	= 0;
 int32_t	exitRAM		= 0;
 bool		pop			= true;
 
-RamMonitor ram;
+//RamMonitor ram;
 
 void out(void) { out(""); }
 
@@ -28,7 +28,7 @@ void outln(const char* msg) {
 // If a function name starts with "virtual" we'd like to remove that bit. Pretend it
 // wasn't there. So, to this end, we'll see if it's there. If so, go beyond the white
 // space, then pass back the address to the first printing char after.
-char* cleanName(const char* inName) {
+char* cleanName(char* inName) {
 
 	int	i;
 	char*	strPtr;
@@ -54,10 +54,11 @@ char* cleanName(const char* inName) {
 stackTrace::stackTrace(const char* fxName) {
 	
 	fName = NULL;
-	startRAM = ram.adj_free();
+	//startRAM = ram.adj_free();
 	for(int i=0;i<stacklevel;i++) { Serial.print(TAB); }
 	if (heapStr(&fName,fxName)) {
 		Serial.print(cleanName(fName));
+		/*
 		Serial.print(F("\tin  RAM : "));
 		Serial.print(startRAM);
 		if (pop && exitRAM) {
@@ -66,6 +67,7 @@ stackTrace::stackTrace(const char* fxName) {
 				Serial.print(startRAM - exitRAM);
 			}
 		}
+		*/
 		Serial.println();
 	} else {
 		Serial.print(cleanName(fxName));
@@ -83,6 +85,7 @@ stackTrace::~stackTrace(void) {
 	if (fName) {
 		Serial.print(cleanName(fName));								// Print the function name.
 		freeStr(&fName);													// Loose it asap.
+		/*
 		exitRAM = ram.adj_free();
 		Serial.print(F("\tout RAM : "));
 		Serial.print(exitRAM);
@@ -90,6 +93,7 @@ stackTrace::~stackTrace(void) {
 			Serial.print(F("\tDelta : "));
 			Serial.print(exitRAM - startRAM);
 		}
+		*/
 		Serial.println();
 	} else {
 		Serial.println(F("\tALLOCATION FAIL"));

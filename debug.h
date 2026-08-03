@@ -15,13 +15,13 @@ extern	void out(void);
 extern	void outln(void);
 extern	void out(const char* msg);
 extern	void outln(const char* msg);
-extern	char* cleanName(const char* inName);
+extern	char* cleanName(char* inName);
 
-extern	RamMonitor ram;
+//extern	RamMonitor ram;
 
-extern	int		stacklevel;
-extern	int32_t	exitRAM;
-extern	bool		pop;
+//extern	int		stacklevel;
+//extern	int32_t	exitRAM;
+//extern	bool		pop;
 
 class stackTrace {
 
