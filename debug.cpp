@@ -57,8 +57,9 @@ stackTrace::stackTrace(const char* fxName) {
 	//startRAM = ram.adj_free();
 	for(int i=0;i<stacklevel;i++) { Serial.print(TAB); }
 	if (heapStr(&fName,fxName)) {
+		Serial.print("> ");
 		Serial.print(cleanName(fName));
-		Serial.print(" >");
+		
 		/*
 		Serial.print(F("\tin  RAM : "));
 		Serial.print(startRAM);
@@ -84,8 +85,9 @@ stackTrace::~stackTrace(void) {
 	stacklevel--;
 	for(int i=0;i<stacklevel;i++) { Serial.print(TAB); }
 	if (fName) {
+		Serial.print("< ");
 		Serial.print(cleanName(fName));								// Print the function name.
-		Serial.print(" <");
+		
 		freeStr(&fName);													// Loose it asap.
 		/*
 		exitRAM = ram.adj_free();
