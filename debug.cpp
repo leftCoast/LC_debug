@@ -106,6 +106,38 @@ stackTrace::~stackTrace(void) {
 }
 
 
+
+// ******************************************
+// **************  printPtr   ***************
+// ******************************************
+
+
+void printPtr(void* anAddr,int numBytes) {
+
+	char	buff[80];
+	char*	string;
+	byte*	data;
+	
+	sprintf(buff,"%s%p%s","********** ",anAddr," **********");
+	Serial.println(buff);
+	string = (char*)anAddr;
+	for(int i=0;i<numBytes;i++) {
+		Serial.print(string[i]);
+	}
+	Serial.println();
+	data =  (byte*)anAddr;
+	for(int i=0;i<numBytes;i++) {
+		Serial.print("[");
+		sprintf(buff,"%02x",data[i]);
+		upCase(buff);
+		Serial.print(buff);
+		Serial.print("] ");
+	}
+	Serial.println();
+}
+
+
+
 // ******************************************
 // ***************   fxTimer  ***************
 // ******************************************
@@ -113,9 +145,9 @@ stackTrace::~stackTrace(void) {
 
 fxTimer::fxTimer(const char* fxName) {
 
-  name = NULL;              // Let's not time ourselves..
-  heapStr(&name,fxName);    // 
-  startMicros = micros();   // So we start here.
+	name = NULL;					// Let's not time ourselves..
+	heapStr(&name,fxName);		// 
+	startMicros = micros();		// So we start here.
 }
 
 
@@ -123,7 +155,7 @@ fxTimer::~fxTimer(void) {
 
   Serial.print(micros()-startMicros); // Grab time as the first of the last..
   Serial.print(" micros\t");          // And then just close down shop.
-  Serial.println(name);               //
+  Serial.println(name);               // A little output..
   freeStr(&name);                     //
 }
 
@@ -153,12 +185,12 @@ void RAMMonitor::begin(void) {
 
 void  RAMMonitor::reportRamStat(const char* aname, uint32_t avalue) {
 
-  Serial.print(aname);
-  Serial.print(": ");
-  Serial.print((avalue + 512) / 1024);
-  Serial.print(" Kb (");
-  Serial.print((((float) avalue) / ram.total()) * 100, 1);
-  Serial.println("%)");
+	Serial.print(aname);
+	Serial.print(": ");
+	Serial.print((avalue + 512) / 1024);
+	Serial.print(" Kb (");
+	Serial.print((((float) avalue) / ram.total()) * 100, 1);
+	Serial.println("%)");
 }
 
 

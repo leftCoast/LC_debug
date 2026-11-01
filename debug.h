@@ -34,6 +34,14 @@ class stackTrace {
 };
 
 
+// ******************************************
+// **************  printPtr   ***************
+// ******************************************
+
+// Want to check out a chunk of RAM?
+void printPtr(void* anAddr,int numBytes);
+
+
 
 // ******************************************
 // ***************  fxTimer   ***************
@@ -42,7 +50,7 @@ class stackTrace {
 // fxTimer; This spits out the amount of time a function takes to execute. Add TIME as the
 // first line of any function you would like to time.  And..
 
-/*
+/* EXAMPLE
 void function1(void) {
   TIME  // This makes the magic happen!
 
@@ -53,16 +61,14 @@ void function1(void) {
 
 class fxTimer {
 
-  public:
-    fxTimer(const char* fxName);
-    ~fxTimer(void);
+	public:
+				fxTimer(const char* fxName);
+				~fxTimer(void);
 
-  private:
-    char*         name;
-    unsigned long startMicros;
+	private:
+				char*				name;
+				unsigned long	startMicros;
 };
-
-
 
 
 //Handy define to put in your functions..
